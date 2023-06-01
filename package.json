@@ -1,0 +1,23 @@
+{
+  "name": "hackacode_backend",
+  "version": "1.0.0",
+  "description": "Backend API and models for TodoCode Hackacode",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateoghidini1998/hackacode_backend.git"
+  },
+  "author": "CodeandoComoLocos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mateoghidini1998/hackacode_backend/issues"
+  },
+  "homepage": "https://github.com/mateoghidini1998/hackacode_backend#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
