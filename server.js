@@ -2,6 +2,7 @@ const express = require('express')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
 const connectDB = require('./config/db')
+const errorHandler = require('./middleware/error');
 
 const app = express();
 
@@ -22,6 +23,8 @@ dotenv.config({ path:'./config/config.env'});
 connectDB();
 
 app.use('/api/auth',  auth);
+
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000
 
