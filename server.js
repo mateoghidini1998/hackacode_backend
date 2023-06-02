@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 const auth = require('./routes/auth');
-const employee = require('./routes/employee');
+const employee = require('./routes/employees');
 
 //Body parser
 app.use(express.json())
@@ -27,6 +27,7 @@ dotenv.config({ path:'./config/config.env'});
 connectDB();
 
 app.use('/api/auth',  auth);
+app.use('/api/employees', employee);
 
 app.use(errorHandler)
 
