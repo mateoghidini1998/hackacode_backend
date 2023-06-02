@@ -9,6 +9,7 @@ const app = express();
 
 const auth = require('./routes/auth');
 const employee = require('./routes/employees');
+const customer = require('./routes/customers');
 
 //Body parser
 app.use(express.json())
@@ -28,6 +29,7 @@ connectDB();
 
 app.use('/api/auth',  auth);
 app.use('/api/employees', employee);
+app.use('/api/customers', customer);
 
 app.use(errorHandler)
 

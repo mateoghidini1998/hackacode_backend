@@ -1,23 +1,18 @@
-const Employee = require('../models/Employee');
+const express = require('express');
+const router = express.Router();
 
-// @desc   Create Employee
-// @route  POST /api/employees/register
-// @access Private
+const {
+    /* register, */
+    getEmployees,
+    getEmployee,
+    updateEmployee,
+    deleteEmployee
+} = require('../controllers/employees');
 
-exports.register = async (req, res, next) => {
-    try {
-        const { email, password } = req.body;
-        const user = await User.create({
-            email,
-            password
-        });
-        res.status(201).json({
-            success: true,
-            data: user
-        })
-    } catch (error) {
-        res.status(400).json({
-            success: false
-        });
-    }
-};
+/* router.post('/register', register); */
+router.get('/', getEmployees);
+router.get('/:id', getEmployee);
+router.put('/:id', updateEmployee);
+router.delete('/:id', deleteEmployee);
+
+module.exports = router;
