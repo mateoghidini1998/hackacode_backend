@@ -12,13 +12,15 @@ const {
     getMe   
 } = require('../controllers/auth');
 
+const { protect } = require('../middleware/auth');
+
 router.post('/register', register);
-router.get('/users', getUsers);
-router.get('/users/:id', getUser);
-router.put('/users/:id', updateUser);
-router.delete('/users/:id', deleteUser);
+router.get('/users', protect, getUsers);
+router.get('/users/:id', protect, getUser);
+router.put('/users/:id', protect, updateUser);
+router.delete('/users/:id', protect, deleteUser);
 router.post('/login', login);
-router.get('/me', getMe);
+router.get('/me', protect, getMe);
 
 
 module.exports = router;

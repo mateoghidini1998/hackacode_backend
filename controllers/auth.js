@@ -77,22 +77,23 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
 });
 
 
-// @desc   Delete a user
-// @route  DELETE /api/auth/users/:id
-// @access Private
-
 exports.deleteUser = asyncHandler(async (req, res, next) => {
-        const user = await User.findByIdAndDelete(req.params.id);
-        if(!user){
-            return next (new ErrorResponse(`User not found with id of ${req.params.id}`, 404));
-        }
+  // Ensure the request has a user object populated by the protect middleware
+  if (!req.user) {
+    return next(new ErrorResponse('Not authorized to delete this user', 401));
+  }
 
-        res.status(200).json({
-            success: true,
-            data: {}
-        })
+  const user = await User.findByIdAndDelete(req.params.id);
+  if (!user) {
+    return next(new ErrorResponse(`User not found with id of ${req.params.id}`, 404));
+  }
 
+  res.status(200).json({
+    success: true,
+    data: {}
+  });
 });
+
 
 // @desc   Loginuser
 // @route  POST /api/v1/auth/login
@@ -154,7 +155,7 @@ const sendTokenResponse = (user, statusCode, res) => {
   // @access Private
 
   exports.getMe = asyncHandler(async (req, res, next) => {
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.user._id);
   
     res.status(200).json({
       success: true,
