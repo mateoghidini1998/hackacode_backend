@@ -15,7 +15,7 @@ const {
 const { protect } = require('../middleware/auth');
 const { authorize } = require('../middleware/auth');
 
-router.post('/register',register);
+router.post('/register', protect, authorize('admin'),register);
 router.get('/users', protect, getUsers);
 router.get('/users/:id', protect, getUser);
 router.put('/users/:id', protect, updateUser);
