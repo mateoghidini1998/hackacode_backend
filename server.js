@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const connectDB = require('./config/db')
 const errorHandler = require('./middleware/error');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const app = express();
 
@@ -22,6 +23,7 @@ if(process.NODE_ENV === 'development'){
     app.use(morgan('dev'))
 }
 
+app.use(cors());
 
 //Load env variables
 dotenv.config({ path:'./config/config.env'});
