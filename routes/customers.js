@@ -11,9 +11,9 @@ const {
 } = require('../controllers/customers');
 
 const { protect } = require('../middleware/auth');
+const {  authorize } = require('../middleware/auth');
 
-
-router.post('/register', protect, register);
+router.post('/register', protect, authorize('admin'), register);
 router.get('/', protect, getCustomers);
 router.get('/:id', protect, getCustomer);
 router.put('/:id', protect, updateCustomer);
