@@ -1,0 +1,43 @@
+[
+    {
+      "_id": "5d713995b721c3bb38c1f5d6",
+      "name": "Manager 1",
+      "lastName": "Lastname 1",
+      "type": "manager",
+      "createdAt": "2023-06-06T00:00:00Z",
+      "user": "5d713995b721c3bb38c1f5d1"
+    },
+    {
+      "_id": "5d713995b721c3bb38c1f5d7",
+      "name": "Manager 2",
+      "lastName": "Lastname 2",
+      "type": "manager",
+      "createdAt": "2023-06-06T00:00:00Z",
+      "user": "5d713995b721c3bb38c1f5d5"
+    },
+    {
+      "_id": "5d713995b721c3bb38c1f5d8",
+      "name": "Employee 1",
+      "lastName": "Lastname 1",
+      "type": "employee",
+      "createdAt": "2023-06-06T00:00:00Z",
+      "user": "5d713995b721c3bb38c1f5d2"
+    },
+    {
+      "_id": "5d713995b721c3bb38c1f5d9",
+      "name": "Employee 2",
+      "lastName": "Lastname 2",
+      "type": "employee",
+      "createdAt": "2023-06-06T00:00:00Z",
+      "user": "5d713995b721c3bb38c1f5d3"
+    },
+    {
+      "_id": "5d713995b721c3bb38c1f5da",
+      "name": "Employee 3",
+      "lastName": "Lastname 3",
+      "type": "employee",
+      "createdAt": "2023-06-06T00:00:00Z",
+      "user": "5d713995b721c3bb38c1f5d4"
+    }
+  ]
+  
