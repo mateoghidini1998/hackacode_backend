@@ -9,6 +9,14 @@ const GameSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Employee'
   }],
+  hours: [{
+    opening: {
+      type: Date
+    },
+    closing: {
+      type: Date
+    }
+  }],
   createdAt: {
     type: Date,
     default: Date.now

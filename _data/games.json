@@ -1,0 +1,77 @@
+[
+    {
+      "name": "Game 1",
+      "employees": ["5d713995b721c3bb38c1f5d8"],
+      "hours": [
+        {
+          "opening": "2023-06-07T08:00:00Z",
+          "closing": "2023-06-07T18:00:00Z"
+        },
+        {
+          "opening": "2023-06-08T10:00:00Z",
+          "closing": "2023-06-08T20:00:00Z"
+        }
+      ],
+      "createdAt": "2023-06-07T12:00:00Z"
+    },
+    {
+      "name": "Game 2",
+      "employees": ["5d713995b721c3bb38c1f5d8", "5d713995b721c3bb38c1f5da"],
+      "hours": [
+        {
+          "opening": "2023-06-07T09:00:00Z",
+          "closing": "2023-06-07T19:00:00Z"
+        },
+        {
+          "opening": "2023-06-08T11:00:00Z",
+          "closing": "2023-06-08T21:00:00Z"
+        }
+      ],
+      "createdAt": "2023-06-07T13:00:00Z"
+    },
+    {
+      "name": "Game 3",
+      "employees": ["5d713995b721c3bb38c1f5d9"],
+      "hours": [
+        {
+          "opening": "2023-06-07T10:00:00Z",
+          "closing": "2023-06-07T20:00:00Z"
+        },
+        {
+          "opening": "2023-06-08T12:00:00Z",
+          "closing": "2023-06-08T22:00:00Z"
+        }
+      ],
+      "createdAt": "2023-06-07T14:00:00Z"
+    },
+    {
+      "name": "Game 4",
+      "employees": ["5d713995b721c3bb38c1f5d8", "5d713995b721c3bb38c1f5da"],
+      "hours": [
+        {
+          "opening": "2023-06-07T11:00:00Z",
+          "closing": "2023-06-07T21:00:00Z"
+        },
+        {
+          "opening": "2023-06-08T13:00:00Z",
+          "closing": "2023-06-08T23:00:00Z"
+        }
+      ],
+      "createdAt": "2023-06-07T15:00:00Z"
+    },
+    {
+      "name": "Game 5",
+      "employees": ["5d713995b721c3bb38c1f5d8", "5d713995b721c3bb38c1f5d9"],
+      "hours": [
+        {
+          "opening": "2023-06-07T12:00:00Z",
+          "closing": "2023-06-07T22:00:00Z"
+        },
+        {
+          "opening": "2023-06-08T14:00:00Z",
+          "closing": "2023-06-09T00:00:00Z"
+        }
+      ],
+      "createdAt": "2023-06-07T16:00:00Z"
+    }
+]  
