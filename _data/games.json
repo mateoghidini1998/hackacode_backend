@@ -1,6 +1,7 @@
 [
     {
-      "name": "Game 1",
+      "name": "Magic Mountain",
+      "description": "An enchanting adventure filled with thrilling rides and magical wonders",
       "employees": ["5d713995b721c3bb38c1f5d8"],
       "hours": [
         {
@@ -15,7 +16,8 @@
       "createdAt": "2023-06-07T12:00:00Z"
     },
     {
-      "name": "Game 2",
+      "name": "Space Mountain",
+      "description": "Blast off on a cosmic roller coaster through the galaxy.",
       "employees": ["5d713995b721c3bb38c1f5d8", "5d713995b721c3bb38c1f5da"],
       "hours": [
         {
@@ -30,7 +32,8 @@
       "createdAt": "2023-06-07T13:00:00Z"
     },
     {
-      "name": "Game 3",
+      "name": "Hit the Jackpot",
+      "description": "Test your luck and win fabulous prizes in this carnival game sensation.",
       "employees": ["5d713995b721c3bb38c1f5d9"],
       "hours": [
         {
@@ -45,7 +48,8 @@
       "createdAt": "2023-06-07T14:00:00Z"
     },
     {
-      "name": "Game 4",
+      "name": "Disco Ride",
+      "description": "Get ready to groove on a spinning ride with funky beats and dazzling lights.",
       "employees": ["5d713995b721c3bb38c1f5d8", "5d713995b721c3bb38c1f5da"],
       "hours": [
         {
@@ -60,7 +64,8 @@
       "createdAt": "2023-06-07T15:00:00Z"
     },
     {
-      "name": "Game 5",
+      "name": "Fantasy World",
+      "description": "Immerse yourself in a realm of imagination and wonder with captivating rides and shows.",
       "employees": ["5d713995b721c3bb38c1f5d8", "5d713995b721c3bb38c1f5d9"],
       "hours": [
         {

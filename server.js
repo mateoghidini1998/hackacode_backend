@@ -5,6 +5,8 @@ const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
+const path = require('path');
 
 const app = express();
 
@@ -26,6 +28,11 @@ if (process.NODE_ENV === 'development') {
 }
 
 app.use(cors());
+
+app.use(fileUpload());
+
+//Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Load env variables
 dotenv.config({ path: './config/config.env' });
