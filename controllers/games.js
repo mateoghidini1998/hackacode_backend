@@ -3,6 +3,7 @@ const Employee = require('../models/Employee');
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/errorResponse');
 const path = require('path');
+const multer = require('multer');
 
 // @desc   Create a game
 // @route  POST /api/games/register
@@ -32,44 +33,11 @@ exports.registerGame = asyncHandler(async (req, res, next) => {
     });
   }
 
-  /* if (!req.files) {
-    return next(new ErrorResponse(`Please upload a file`, 400));
-  }
-
-  const file = req.files.file;
-
-  // Make sure the image is a photo
-  if (!file.mimetype.startsWith('image')) {
-    return next(new ErrorResponse(`Please upload an image file`, 400));
-  }
-
-  // Check filesize
-  if (file.size > process.env.MAX_FILE_UPLOAD) {
-    return next(
-      new ErrorResponse(
-        `Please upload an image less than ${process.env.MAX_FILE_UPLOAD}`,
-        400
-      )
-    );
-  }
-
-  // Create custom filename
-  file.name = `photo_${game._id}${path.parse(file.name).ext}`;
-
-  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
-    if (err) {
-      console.error(err);
-      return next(new ErrorResponse(`Problem with file upload`, 500));
-    }
-  });
- */
-
   const game = await Game.create({
     name,
     description,
     employees,
     hours,
-    /* photo: file.name, */
   });
 
   res.status(201).json({
@@ -139,3 +107,34 @@ exports.uploadPhoto = asyncHandler(async (req, res, next) => {
     });
   });
 });
+
+//MULTER file upload
+
+// Set storage engine
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, process.env.FILE_UPLOAD_PATH); // Set the destination folder for uploaded files
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    cb(
+      null,
+      `photo_${game._id}_${uniqueSuffix}${path.extname(file.originalname)}`
+    ); // Generate a unique filename for the uploaded file
+  },
+});
+
+// Create multer instance
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: process.env.MAX_FILE_UPLOAD,
+  },
+  fileFilter: function (req, file, cb) {
+    if (file.mimetype.startsWith('image')) {
+      cb(null, true); // Accept the file if it is an image
+    } else {
+      cb(new Error('Please upload an image file')); // Reject the file if it is not an image
+    }
+  },
+}).single('file');
