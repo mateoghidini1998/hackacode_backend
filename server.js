@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 const path = require('path');
-const multer = require('multer');
 
 const app = express();
 
@@ -30,33 +29,8 @@ if (process.NODE_ENV === 'development') {
 
 app.use(cors());
 
-const fileStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads');
-  },
-  filename: (req, file, cb) => {
-    cb(null, new Date().toISOString() + '-' + file.originalname);
-  },
-});
-
-const fileFilter = (req, file, cb) => {
-  if (
-    file.mimetype === 'image/png' ||
-    file.mimetype === 'image/jpg' ||
-    file.mimetype === 'image/jpeg'
-  ) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
 app.use(fileUpload());
 
-//Set static folder
-app.use(
-  multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
-);
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Load env variables
