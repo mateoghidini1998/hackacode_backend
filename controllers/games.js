@@ -56,6 +56,21 @@ exports.getGames = asyncHandler(async (req, res) => {
   });
 });
 
+exports.getGame = asyncHandler(async (req, res, next) => {
+  const game = await Game.findById(req.params.id);
+
+  if (!game) {
+    return next(
+      new ErrorResponse(`Game not found with id of ${req.params.id}`, 404)
+    );
+  }
+
+  res.status(200).json({
+    success: true,
+    data: game,
+  });
+});
+
 // @desc   Upload photo to a game
 // @route  PUT /api/games/:id/photo
 // @access Private
@@ -105,5 +120,46 @@ exports.uploadPhoto = asyncHandler(async (req, res, next) => {
       success: true,
       data: file.name,
     });
+  });
+});
+
+//@desc Update a game
+// @route  PUT /api/games/:id
+// @access Private
+
+exports.updateGame = asyncHandler(async (req, res, next) => {
+  const game = await Game.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!game) {
+    return next(
+      new ErrorResponse(`Game not found with id of ${req.params.id}`, 404)
+    );
+  }
+
+  res.status(200).json({
+    success: true,
+    data: game,
+  });
+});
+
+//@desc Delete a game
+// @route  DELETE /api/games/:id
+// @access Private
+
+exports.deleteGame = asyncHandler(async (req, res, next) => {
+  const game = await Game.findByIdAndDelete(req.params.id);
+
+  if (!game) {
+    return next(
+      new ErrorResponse(`Game not found with id of ${req.params.id}`, 404)
+    );
+  }
+
+  res.status(201).json({
+    success: true,
+    data: {},
   });
 });
