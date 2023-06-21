@@ -33,6 +33,32 @@ exports.registerGame = asyncHandler(async (req, res, next) => {
     });
   }
 
+  // Verify that the employees exist
+  const foundEmployees = await Employee.find({
+    _id: { $in: employees },
+  });
+
+  const foundEmployeesIds = foundEmployees.map((f) => f._id.toString());
+  const errors = [];
+
+  for (var i = 0; i < employees.length; i++) {
+    if (!foundEmployeesIds.includes(employees[i])) {
+      errors.push(`Employees not found with id of ${employees[i]}`);
+    } else {
+      const emp = foundEmployees.find((e) => e._id.toString() === employees[i]);
+
+      if (emp.type !== 'employee') {
+        errors.push(`Employees is not a Game Employee ${employees[i]}`);
+      }
+    }
+  }
+
+  if (errors.length > 0) {
+    return next(new ErrorResponse(errors.join(','), 404));
+  }
+
+  console.log(employees);
+
   const game = await Game.create({
     name,
     description,
@@ -48,6 +74,12 @@ exports.registerGame = asyncHandler(async (req, res, next) => {
 
 exports.getGames = asyncHandler(async (req, res) => {
   const games = await Game.find({});
+
+  games.forEach((game) => {
+    if (game.employees.length === 0) {
+      game.available = false;
+    }
+  });
 
   res.status(200).json({
     success: true,

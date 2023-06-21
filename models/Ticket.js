@@ -1,24 +1,20 @@
 const mongoose = require('mongoose');
 
 const TicketSchema = new mongoose.Schema({
-  code: {
-    type: String,
-    required: true
-  },
-  customer:{
+  customer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Customer'
+    ref: 'Customer',
+    required: true,
   },
-  game:{
+  game: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Game'
+    ref: 'Game',
+    required: true,
   },
   createdAt: {
     type: Date,
-    default: Date.now
-  }
-  
-
+    default: Date.now,
+  },
 });
 
 const Ticket = mongoose.model('Ticket', TicketSchema);
