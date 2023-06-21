@@ -6,11 +6,12 @@ const asyncHandler = require('../middleware/async');
 // @access Private
 
 exports.register = asyncHandler(async (req, res, next) => {
-    const { name, lastName, dni } = req.body;
+    const { name, lastName, dni, email } = req.body;
     const customer = await Customer.create({
         name,
         lastName,
-        dni
+        dni,
+        email
     });
 
     res.status(201).json({
