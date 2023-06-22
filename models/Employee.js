@@ -25,6 +25,23 @@ const employeeSchema = new mongoose.Schema({
   },
 });
 
+employeeSchema.pre('deleteOne', { document: true }, async function (next) {
+  try {
+    const employeeId = this._id;
+
+    await mongoose
+      .model('Game')
+      .updateMany(
+        { employees: employeeId },
+        { $pull: { employees: employeeId } }
+      );
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 const Employee = mongoose.model('Employee', employeeSchema);
 
 module.exports = Employee;

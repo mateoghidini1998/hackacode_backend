@@ -81,13 +81,15 @@ exports.updateEmployee = asyncHandler(async (req, res, next) => {
 // @access Private
 
 exports.deleteEmployee = asyncHandler(async (req, res, next) => {
-  const employee = await Employee.findByIdAndDelete(req.params.id);
+  const employee = await Employee.findById(req.params.id);
 
   if (!employee) {
     return next(
       new ErrorResponse(`Employee not found with id of ${req.params.id}`, 404)
     );
   }
+
+  await employee.deleteOne();
 
   res.status(201).json({
     success: true,

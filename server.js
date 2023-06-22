@@ -15,6 +15,7 @@ const employee = require('./routes/employees');
 const customer = require('./routes/customers');
 const games = require('./routes/games');
 const users = require('./routes/users');
+const tickets = require('./routes/tickets');
 
 //Body parser
 app.use(express.json());
@@ -42,6 +43,7 @@ app.use('/api/employees', employee);
 app.use('/api/customers', customer);
 app.use('/api/games', games);
 app.use('/api/users', users);
+app.use('/api/tickets', tickets);
 
 app.use(errorHandler);
 
