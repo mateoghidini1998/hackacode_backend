@@ -16,6 +16,7 @@ const customer = require('./routes/customers');
 const games = require('./routes/games');
 const users = require('./routes/users');
 const tickets = require('./routes/tickets');
+const sales = require('./routes/sales');
 
 //Body parser
 app.use(express.json());
@@ -44,6 +45,7 @@ app.use('/api/customers', customer);
 app.use('/api/games', games);
 app.use('/api/users', users);
 app.use('/api/tickets', tickets);
+app.use('/api/sales', sales);
 
 app.use(errorHandler);
 

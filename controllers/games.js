@@ -3,7 +3,6 @@ const Employee = require('../models/Employee');
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/errorResponse');
 const path = require('path');
-const multer = require('multer');
 
 // @desc   Create a game
 // @route  POST /api/games/register
