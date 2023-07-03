@@ -10,7 +10,21 @@ const Ticket = require('../models/Ticket');
 
 exports.createSale = asyncHandler(async (req, res, next) => {
   const { tickets } = req.body;
-  const sale = await Sale.create(req.body);
+  console.log(tickets);
+
+  const ticketsFound = await Ticket.find({ _id: { $in: tickets } }).populate(
+    'game'
+  );
+  console.log(ticketsFound);
+
+  //Calculate Total Amount for a Sale
+  const total = ticketsFound.reduce((sum, ticket) => {
+    const price = ticket.game.price;
+    console.log(`Ticket ID: ${ticket._id}, Price: ${price}`);
+    return sum + price;
+  }, 0);
+
+  const sale = await Sale.create({ tickets, total });
 
   res.status(201).json({
     success: true,
@@ -92,5 +106,29 @@ exports.deleteSale = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     data: {},
+  });
+});
+
+//@desc      Get the total amount of all sales
+//@method    GET
+//@access    Private
+
+exports.getTotalSales = asyncHandler(async (req, res, next) => {
+  const sales = await Sale.find();
+
+  if (!sales) {
+    return next(new ErrorResponse(`No sales found`));
+  }
+
+  let total = 0;
+  sales.forEach((sale) => {
+    total += sale.total;
+  });
+
+  console.log(total);
+
+  res.status(200).json({
+    success: true,
+    total,
   });
 });

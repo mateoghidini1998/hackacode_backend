@@ -1,14 +1,17 @@
 const mongoose = require('mongoose');
 
 const SaleSchema = new mongoose.Schema({
-  tiket: [
+  tickets: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Tiket',
+      ref: 'Ticket',
       required: true,
     },
   ],
-
+  total: {
+    type: Number,
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

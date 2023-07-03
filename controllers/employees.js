@@ -1,5 +1,6 @@
 const Employee = require('../models/Employee');
 const asyncHandler = require('../middleware/async');
+const Game = require('../models/Game');
 
 // @desc   Register Employee
 // @route  POST /api/employees/register
@@ -94,5 +95,29 @@ exports.deleteEmployee = asyncHandler(async (req, res, next) => {
   res.status(201).json({
     success: true,
     data: {},
+  });
+});
+
+exports.getEmployeesAndGame = asyncHandler(async (req, res, next) => {
+  const employees = await Employee.find({ type: 'employee' });
+
+  const employeeIds = employees.map((employee) => employee._id);
+
+  const games = await Game.find({ employees: { $in: employeeIds } });
+
+  const employeesWithGames = employees.map((employee) => {
+    const gamesForEmployee = games.filter((game) =>
+      game.employees.includes(employee._id)
+    );
+    return {
+      ...employee.toObject(),
+      games: gamesForEmployee,
+    };
+  });
+
+  res.status(200).json({
+    success: true,
+    count: employeesWithGames.length,
+    data: employeesWithGames,
   });
 });

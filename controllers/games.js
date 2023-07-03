@@ -9,7 +9,7 @@ const path = require('path');
 // @access Private
 
 exports.registerGame = asyncHandler(async (req, res, next) => {
-  const { name, description, employees, hours } = req.body;
+  const { name, description, employees, hours, price } = req.body;
 
   // Verify that the hours are valid and dont overlap
   const overlappingHours = hours.some((currentHour, currentIndex) => {
@@ -63,6 +63,7 @@ exports.registerGame = asyncHandler(async (req, res, next) => {
     description,
     employees,
     hours,
+    price,
   });
 
   res.status(201).json({

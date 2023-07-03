@@ -13,6 +13,10 @@ const GameSchema = new mongoose.Schema({
     type: String,
     default: 'no-photo.jpg',
   },
+  price: {
+    type: Number,
+    required: true,
+  },
   employees: [
     {
       type: mongoose.Schema.Types.ObjectId,
