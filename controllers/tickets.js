@@ -9,16 +9,16 @@ const Game = require('../models/Game');
 //@access Private
 
 exports.createTicket = asyncHandler(async (req, res, next) => {
-  const { customer, game } = req.body;
-  const customerId = await Customer.findById(customer);
-  const gameId = await Game.findById(game);
+  const { customerId, gameId } = req.body;
+  const customer = await Customer.findById(customerId);
+  const game = await Game.findById(gameId);
 
   //Check if customer and game exist
-  if (!customerId) {
+  if (!customer) {
     return next(
       new ErrorResponse(`Customer with id ${customerId} not found`, 404)
     );
-  } else if (!gameId) {
+  } else if (!game) {
     return next(new ErrorResponse(`Game with id ${gameId} not found`, 404));
   }
 
