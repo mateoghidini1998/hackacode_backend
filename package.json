@@ -4,7 +4,7 @@
   "description": "Backend API and models for TodoCode Hackacode",
   "main": "server.js",
   "scripts": {
-    "start": "SET NODE_ENV=production & node server",
+    "start": "NODE_ENV=production & node server",
     "dev": "nodemon server"
   },
   "repository": {
