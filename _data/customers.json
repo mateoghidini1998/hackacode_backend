@@ -1,0 +1,75 @@
+[
+    {
+        "_id": "5d713995b721c3bb38c1f5d1",
+        "dni":"40676881",
+        "name": "Francisco",
+        "lastName": "Gomez",
+        "email": "fgomez@gmail.com",
+        "createdAt": "2023-06-06T00:00:00Z"
+    },
+    {
+        "_id": "5d713995b721c3bb38c1f5d2",
+        "dni":"42624881",
+        "name": "Valentina",
+        "lastName": "Succi",
+        "email": "succib@gmail.com",
+        "createdAt": "2023-06-06T00:00:00Z"
+    },
+    {
+        "_id": "5d713995b721c3bb38c1f5d3",
+        "dni":"39676881",
+        "name": "Rodrigo",
+        "lastName": "Fernandez",
+        "email": "fernandezr@gmail.com",
+        "createdAt": "2023-06-06T00:00:00Z"
+    },
+    {
+        "_id": "5d713995b721c3bb38c1f5d4",
+        "dni":"28676221",
+        "name": "Pablo",
+        "lastName": "Montes",
+        "email": "montesp@gmail.com",
+        "createdAt": "2023-06-06T00:00:00Z"
+    },
+    {
+        "_id": "5d713995b721c3bb38c1f5d5",
+        "dni":"35672881",
+        "name": "Juliana",
+        "lastName": "Vidal",
+        "email": "julianavidal@gmail.com",
+        "createdAt": "2023-06-06T00:00:00Z"
+    },
+    {
+        "_id": "5d713995b721c3bb38c1f5d6",
+        "dni":"43676881",
+        "name": "Pedro",
+        "lastName": "Fitipaldi",
+        "email": "fitipaldip@gmail.com",
+        "createdAt": "2023-06-06T00:00:00Z"
+    },
+    {
+        "_id": "5d713995b721c3bb38c1f5d7",
+        "dni":"416222893",
+        "name": "Martin",
+        "lastName": "Benitez",
+        "email": "martinbenitez@gmail.com",
+        "createdAt": "2023-06-06T00:00:00Z"
+    },
+    {
+        "_id": "5d713995b721c3bb38c1f5d8",
+        "dni":"40675551",
+        "name": "Miranda",
+        "lastName": "Boris",
+        "email": "borismiranda@gmail.com",
+        "createdAt": "2023-06-06T00:00:00Z"
+    },
+    {
+        "_id": "5d713995b721c3bb38c1f5d9",
+        "dni":"37576864",
+        "name": "Joaquin",
+        "lastName": "Meirel",
+        "email": "meirelj@gmail.com",
+        "createdAt": "2023-06-06T00:00:00Z"
+    }
+    
+]

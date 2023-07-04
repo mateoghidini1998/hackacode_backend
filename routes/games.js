@@ -8,6 +8,8 @@ const {
   updateGame,
   deleteGame,
   getGame,
+  mostTickets,
+  ticketsSoldByDate,
 } = require('../controllers/games');
 
 const { protect } = require('../middleware/auth');
@@ -15,6 +17,8 @@ const { authorize } = require('../middleware/auth');
 
 router.post('/register', protect, authorize('admin'), registerGame);
 router.get('/', protect, getGames);
+router.get('/most-tickets', mostTickets);
+router.get('/tickets-sold-by-date', ticketsSoldByDate);
 router.put('/:id/photo', protect, uploadPhoto);
 router.delete('/:id', protect, authorize('admin'), deleteGame);
 router.put('/:id', protect, authorize('admin'), updateGame);

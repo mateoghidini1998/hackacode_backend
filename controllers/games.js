@@ -195,3 +195,124 @@ exports.deleteGame = asyncHandler(async (req, res, next) => {
     data: {},
   });
 });
+
+//@desc      Get the Game that with the most tickets sold until a date
+//@method    GET /api/games/most-tickets
+//@access    Private
+
+exports.mostTickets = asyncHandler(async (req, res, next) => {
+  const currentDate = new Date();
+
+  // Get the current date
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  const day = currentDate.getDate();
+
+  const endDate = new Date(year, month, day, 23, 59, 59, 999);
+
+  //Make a left join within the tickets property Game and the _id Of the Game and create a Tickets array
+  const games = await Game.aggregate([
+    {
+      $lookup: {
+        from: 'tickets',
+        localField: '_id',
+        foreignField: 'game',
+        as: 'tickets',
+      },
+    },
+    //Make a response by showing the id, name of the customer
+    //and amount of tickets in a specific month and year for
+    {
+      $project: {
+        _id: 1,
+        name: 1,
+        ticketCount: {
+          $size: {
+            //Filter tickets and create a new array that contains only the tickets within the range of dates
+            $filter: {
+              input: '$tickets',
+              as: 'ticket',
+              cond: {
+                $and: [{ $lte: ['$$ticket.createdAt', endDate] }],
+              },
+            },
+          },
+        },
+      },
+    },
+    {
+      $sort: { ticketCount: -1 },
+    },
+    {
+      $limit: 1,
+    },
+  ]);
+
+  if (games.length === 0) {
+    return res.status(404).json({
+      success: false,
+      error: `No games found for the specified date ${endDate}`,
+    });
+  }
+
+  const game = games[0];
+
+  res.status(200).json({
+    success: true,
+    data: game,
+  });
+});
+
+//@desc      Get all the amount of tickets sold for all games in an specific Date
+//@method    GET api/games/tickets-sold?year={year}&month={month}&day={day}
+//@access    Private
+
+exports.ticketsSoldByDate = asyncHandler(async (req, res, next) => {
+  const { day, month, year } = req.query;
+
+  //Set starting date to be the 00:00:00 of the day and end date to be the 23:59:59 of the day
+  const startDate = new Date(year, month - 1, day, 0, 0, 0, 0);
+  const endDate = new Date(year, month - 1, day, 23, 59, 59, 999);
+
+  const ticketsCount = await Game.aggregate([
+    {
+      $lookup: {
+        from: 'tickets',
+        localField: '_id',
+        foreignField: 'game',
+        as: 'tickets',
+      },
+    },
+    {
+      $match: {
+        'tickets.createdAt': {
+          $gte: startDate,
+          $lte: endDate,
+        },
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        ticketsCount: { $sum: { $size: '$tickets' } },
+      },
+    },
+  ]);
+
+  const ticketsSold =
+    ticketsCount.length > 0 ? ticketsCount[0].ticketsCount : 0;
+
+  if (!ticketsCount) {
+    return next(
+      new ErrorResponse(
+        `No tickets sold for the specified date ${endDate}`,
+        404
+      )
+    );
+  }
+
+  res.json({
+    success: true,
+    data: ticketsSold,
+  });
+});

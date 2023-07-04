@@ -9,7 +9,7 @@ const Game = require('../models/Game');
 //@access Private
 
 exports.createTicket = asyncHandler(async (req, res, next) => {
-  const { customerId, gameId } = req.body;
+  const { customerId, gameId, dueDate } = req.body;
   const customer = await Customer.findById(customerId);
   const game = await Game.findById(gameId);
 
@@ -22,9 +22,36 @@ exports.createTicket = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`Game with id ${gameId} not found`, 404));
   }
 
+  //Obtaining the game hours
+  const gameHours = game.hours;
+
+  //Check if the ticket dueDate is valid.
+  let isDueDateValid = false;
+
+  for (const hours of gameHours) {
+    //Get the opening and closing hours for each hours item
+    const openingHour = new Date(hours.opening);
+    const closingHour = new Date(hours.closing);
+    //Generate a date object for dueDate
+    const dueDateObj = new Date(dueDate);
+
+    //Check if the dueDate is within the hours range
+    if (dueDateObj >= openingHour && dueDateObj <= closingHour) {
+      isDueDateValid = true;
+      break;
+    }
+  }
+
+  if (!isDueDateValid) {
+    return next(
+      new ErrorResponse('Due date is not within the game hours range', 400)
+    );
+  }
+
   const ticket = await Ticket.create({
     customer,
     game,
+    dueDate,
   });
 
   res.status(201).json({

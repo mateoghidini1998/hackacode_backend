@@ -114,18 +114,59 @@ exports.deleteSale = asyncHandler(async (req, res, next) => {
 //@access    Private
 
 exports.getTotalSales = asyncHandler(async (req, res, next) => {
-  const sales = await Sale.find();
+  const { month, year } = req.query;
+
+  //Create a range of dates by providing an year and a month
+  const startDate = new Date(year, month - 1, 1);
+  const endDate = new Date(year, month, 0, 23, 59, 59, 999);
+
+  //Find all sales within the range of dates
+  const sales = await Sale.find({
+    createdAt: { $gte: startDate, $lte: endDate },
+  });
 
   if (!sales) {
     return next(new ErrorResponse(`No sales found`));
   }
 
+  //Calculate total
   let total = 0;
   sales.forEach((sale) => {
+    console.log(typeof sale.total, sale.total);
     total += sale.total;
   });
 
-  console.log(total);
+  res.status(200).json({
+    success: true,
+    total,
+  });
+});
+
+//@desc     Get the total amount from all Sales for an specific Date
+//@method   GET
+//@access   Private
+
+exports.getTotalSalesToday = asyncHandler(async (req, res, next) => {
+  const currentDate = new Date();
+
+  // Get the current date
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  const day = currentDate.getDate();
+
+  //Set the end date to the last minute and second of the day
+  const endDate = new Date(year, month, day, 23, 59, 59, 999);
+
+  const sales = await Sale.find({
+    createdAt: { $lte: endDate },
+  });
+
+  //Calculate Total
+  let total = 0;
+  sales.forEach((sale) => {
+    console.log(typeof sale.total, sale.total);
+    total += sale.total;
+  });
 
   res.status(200).json({
     success: true,
