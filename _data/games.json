@@ -15,7 +15,8 @@
       ],
       "price": 10,
       "createdAt": "2023-06-07T12:00:00Z",
-      "photo":"photo_648cddfe2a00bc7306a1ee41.jpg"
+      "photo":"photo_649250a6b733975c23ef7bbb.jpg"
+
     },
     {
       "name": "Space Mountain",
@@ -33,7 +34,7 @@
       ],
       "price": 12,
       "createdAt": "2023-06-07T13:00:00Z",
-      "photo":"photo_648cddfe2a00bc7306a1ee41.jpg"
+      "photo":"Tomorrowland photos and clipart.jpg"
     },
     {
       "name": "Hit the Jackpot",
@@ -51,7 +52,7 @@
       ],
       "price": 20,
       "createdAt": "2023-06-07T14:00:00Z",
-      "photo":"photo_648cddfe2a00bc7306a1ee41.jpg"
+      "photo":"pexels-pixabay-262438.jpg"
     },
     {
       "name": "Disco Ride",
@@ -69,7 +70,7 @@
       ],
       "price": 17,
       "createdAt": "2023-06-07T15:00:00Z",
-      "photo":"photo_648cddfe2a00bc7306a1ee41.jpg"
+      "photo":"photo_649250a6b733975c23ef7bc1.jpg"
     },
     {
       "name": "Fantasy World",
