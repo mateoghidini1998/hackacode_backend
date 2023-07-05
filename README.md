@@ -10,7 +10,7 @@ This project is the API for the backend of the TodoCode Hackacode Project. This 
 
 ### PACKAGES
 
-- "bcryptjs": "^2.4.3",
+-  "bcryptjs": "^2.4.3",
 -  "colors": "^1.4.0",
 -  "cookie-parser": "^1.4.6",
 -  "cors": "^2.8.5",
@@ -81,6 +81,20 @@ JWT_COOKIE_EXPIRE=30
 FILE_UPLOAD_PATH= <ADD THE DIRECTORY WHERE YOU WANT TO STORE FILES> e.g ./public/uploads
 MAX_FILE_UPLOAD=30d
 ```
+
+### SEEDERS
+
+Fill in your database with initial data by running:
+
+```
+node seed -i
+```
+
+You can also delete data by running 
+```
+node seed -d
+```
+
 Your are now set to start your development server by running in your terminal the following command line:
 
 ```
