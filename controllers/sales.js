@@ -109,7 +109,7 @@ exports.deleteSale = asyncHandler(async (req, res, next) => {
   });
 });
 
-//@desc      Get the total amount of all sales
+//@desc      Get the total amount of all sales in a month and year
 //@method    GET
 //@access    Private
 
@@ -146,25 +146,20 @@ exports.getTotalSales = asyncHandler(async (req, res, next) => {
 //@method   GET
 //@access   Private
 
-exports.getTotalSalesToday = asyncHandler(async (req, res, next) => {
-  const currentDate = new Date();
+exports.getTotalSalesByDate = asyncHandler(async (req, res, next) => {
+  const { day, month, year } = req.query;
 
-  // Get the current date
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-  const day = currentDate.getDate();
-
-  //Set the end date to the last minute and second of the day
-  const endDate = new Date(year, month, day, 23, 59, 59, 999);
+  // Set starting date to be the 00:00:00 of the day and end date to be the 23:59:59 of the day
+  const startDate = new Date(year, month - 1, day, 0, 0, 0, 0);
+  const endDate = new Date(year, month - 1, day, 23, 59, 59, 999);
 
   const sales = await Sale.find({
-    createdAt: { $lte: endDate },
+    createdAt: { $gte: startDate, $lte: endDate },
   });
 
   //Calculate Total
   let total = 0;
   sales.forEach((sale) => {
-    console.log(typeof sale.total, sale.total);
     total += sale.total;
   });
 
