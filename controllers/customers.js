@@ -115,6 +115,8 @@ exports.mostTickets = asyncHandler(async (req, res, next) => {
       $project: {
         _id: 1,
         name: 1,
+        lastName: 1,
+        dni: 1,
         ticketCount: {
           $size: {
             //Filter tickets and create a new array that contains only the tickets within the range of dates
