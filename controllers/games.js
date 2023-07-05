@@ -1,4 +1,5 @@
 const Game = require('../models/Game');
+const Ticket = require('../models/Ticket');
 const Employee = require('../models/Employee');
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/errorResponse');
@@ -314,5 +315,39 @@ exports.ticketsSoldByDate = asyncHandler(async (req, res, next) => {
   res.json({
     success: true,
     data: ticketsSold,
+  });
+});
+
+//@desc      Get all the amount of tickets sold for a game in an specific Date
+//@method    GET api/games/:id/tickets-sold?year={year}&month={month}&day={day}
+//@access    Private
+
+exports.ticketsByAGame = asyncHandler(async (req, res, next) => {
+  const { day, month, year } = req.query;
+
+  // Set starting date to be the 00:00:00 of the day and end date to be the 23:59:59 of the day
+  const startDate = new Date(year, month - 1, day, 0, 0, 0, 0);
+  const endDate = new Date(year, month - 1, day, 23, 59, 59, 999);
+
+  const ticketsCount = await Ticket.countDocuments({
+    game: req.params.id,
+    createdAt: {
+      $gte: startDate,
+      $lte: endDate,
+    },
+  });
+
+  if (ticketsCount === 0) {
+    return next(
+      new ErrorResponse(
+        `No tickets sold for the specified date ${endDate} and Game ${req.params}`,
+        404
+      )
+    );
+  }
+
+  res.json({
+    success: true,
+    data: ticketsCount,
   });
 });
