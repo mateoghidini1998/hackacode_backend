@@ -63,6 +63,7 @@ exports.authorizeEmployee =
   async (req, res, next) => {
     //Get the logged in user id
     const userId = req.user._id;
+    const userRole = req.user.role;
 
     const employee = await Employee.findOne({ user: userId });
     console.log(employee);
@@ -70,8 +71,7 @@ exports.authorizeEmployee =
     if (!employee) {
       return next(new ErrorResponse('Employee not found', 404));
     }
-
-    if (!types.includes(employee.type)) {
+    if (!types.includes(employee.type) && userRole != 'admin') {
       return next(
         new ErrorResponse(
           `Employee role ${employee.type} is not authorized to access this route`,

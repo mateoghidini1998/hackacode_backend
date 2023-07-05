@@ -14,16 +14,16 @@ const {
 const { protect } = require('../middleware/auth');
 const { authorizeEmployee } = require('../middleware/auth');
 
-router.post('/', protect, authorizeEmployee('manager'), createSale);
-router.get('/', protect, authorizeEmployee('manager'), getSales);
+router.post('/', protect, authorizeEmployee('employee'), createSale);
+router.get('/', protect, getSales);
 router.get('/total', protect, getTotalSales);
 router.get('/total-sales-by-date', protect, getTotalSalesByDate);
-router.get('/:id', protect, authorizeEmployee('manager'), protect, getSale);
-router.put('/:id', protect, authorizeEmployee('manager'), protect, updateSale);
+router.get('/:id', protect, authorizeEmployee('employee'), protect, getSale);
+router.put('/:id', protect, authorizeEmployee('employee'), protect, updateSale);
 router.delete(
   '/:id',
   protect,
-  authorizeEmployee('manager'),
+  authorizeEmployee('employee'),
   protect,
   deleteSale
 );
