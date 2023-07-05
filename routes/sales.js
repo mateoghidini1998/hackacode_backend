@@ -12,13 +12,20 @@ const {
 } = require('../controllers/sales');
 
 const { protect } = require('../middleware/auth');
+const { authorizeEmployee } = require('../middleware/auth');
 
-router.post('/', protect, createSale);
-router.get('/', protect, getSales);
+router.post('/', protect, authorizeEmployee('manager'), createSale);
+router.get('/', protect, authorizeEmployee('manager'), getSales);
 router.get('/total', protect, getTotalSales);
 router.get('/total-sales-by-date', protect, getTotalSalesByDate);
-router.get('/:id', protect, getSale);
-router.put('/:id', protect, updateSale);
-router.delete('/:id', protect, deleteSale);
+router.get('/:id', protect, authorizeEmployee('manager'), protect, getSale);
+router.put('/:id', protect, authorizeEmployee('manager'), protect, updateSale);
+router.delete(
+  '/:id',
+  protect,
+  authorizeEmployee('manager'),
+  protect,
+  deleteSale
+);
 
 module.exports = router;
